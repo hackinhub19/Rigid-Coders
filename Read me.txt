@@ -1,1 +1,3 @@
 RIGID CODERS
+to execute the text_recognition.py 
+python text_recognition.py --east frozen_east_text_detection.pb --image images/car_wash.jpg

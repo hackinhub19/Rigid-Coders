@@ -1,3 +1,16 @@
 RIGID CODERS
+
 to execute the text_recognition.py 
-python text_recognition.py --east frozen_east_text_detection.pb --image images/car_wash.jpg
+python text_recognition.py --east frozen_east_text_detection.pb --image images/page2.jpg
+
+camera.py
+python camera.py
+
+to execute the text_video_detection.py
+python text_video_detection.py --east frozen_east_text_detection.pb
+
+Dependencies
+pip install opencv
+pip install PILLOW
+pip install args
+pip install gtts

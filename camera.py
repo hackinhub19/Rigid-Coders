@@ -7,6 +7,7 @@ from PIL import Image
 from gtts import gTTS 
 import os 
 import cv2
+from imutils.object_detection import non_max_suppression
 Builder.load_string('''
 <CameraClick>:
     orientation: 'vertical'
@@ -33,6 +34,7 @@ class CameraClick(BoxLayout):
         Function to capture the images and give them the names
         according to their captured time and date.
         '''
+       
         cam = cv2.VideoCapture(0)
 
         ret,frame=cam.read()
@@ -40,20 +42,21 @@ class CameraClick(BoxLayout):
         timestr = time.strftime("%Y%m%d_%H%M%S")
         img_name="IMG_{}.png".format(timestr)
         print("{} written!".format(img_name))
-        cv2.imwrite(img_name)
+        cv2.imwrite(img_name, frame)
         cam.release()
         cv2.destroyAllWindows()
         pytesseract.pytesseract.tesseract_cmd=r"C:/Program Files (x86)/Tesseract-OCR/tesseract"
-        img=Image.open(img_name,frame)
+        img=Image.open(img_name)
         text=pytesseract.image_to_string(img)
         print(text)
+            #frame = imutils.resize(frame, width=1000)
         mytext = text
         language = 'en'
         myobj = gTTS(text=mytext, lang=language, slow=False) 
         myobj.save("welcome.mp3") 
         os.system("welcome.mp3")
         print("Captured")
-       # frame.reshape(-1,1)
+       
         
 
 class TestCamera(App):
